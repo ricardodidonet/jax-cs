@@ -1,0 +1,30 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "jax-cs"
+version = "0.1.0"
+description = "JAX-based computation of Lagrangian Coherent Structures (a JAX port of numbacs)"
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.10"
+authors = [{ name = "Ricardo Didonet" }]
+keywords = ["LCS", "FTLE", "LAVD", "JAX", "dynamical-systems", "oceanography"]
+dependencies = [
+    "jax>=0.4.30",
+    "equinox>=0.11",
+    "numpy>=1.24",
+]
+
+[project.optional-dependencies]
+extraction = ["scipy>=1.10", "contourpy>=1.0"]
+plot = ["matplotlib>=3.7"]
+test = ["pytest>=7", "scipy>=1.10", "contourpy>=1.0"]
+dev = ["pytest>=7", "scipy>=1.10", "contourpy>=1.0", "matplotlib>=3.7"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/jaxcs"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
