@@ -18,6 +18,10 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
+# GPU support: plain `jax` is CPU-only. Install this extra to pull a
+# CUDA-enabled jaxlib (NVIDIA GPU, CUDA 12.x) so computation runs on the GPU
+# instead of silently falling back to CPU.
+cuda12 = ["jax[cuda12]>=0.4.30"]
 extraction = ["scipy>=1.10", "contourpy>=1.0"]
 plot = ["matplotlib>=3.7"]
 test = ["pytest>=7", "scipy>=1.10", "contourpy>=1.0"]

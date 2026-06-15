@@ -28,8 +28,26 @@ to flow parameters).
 ## Install
 
 ```bash
-pip install -e ".[dev]"     # or: uv pip install -e ".[dev]"
+pip install -e ".[dev]"            # CPU
+pip install -e ".[dev,cuda12]"     # NVIDIA GPU (CUDA 12.x)
 ```
+
+`uv pip install -e ".[dev]"` works too.
+
+### GPU
+
+Plain `pip install jax` ships a **CPU-only** `jaxlib`, so a default install
+runs on CPU even on a GPU box (you'll see JAX log *"No GPU/TPU found, falling
+back to CPU"*). The `cuda12` extra pulls a CUDA-enabled jaxlib for NVIDIA
+GPUs. Confirm the GPU is visible:
+
+```bash
+python -c "import jax; print(jax.devices())"
+# CPU-only -> [CpuDevice(id=0)]      GPU OK -> [CudaDevice(id=0)]
+```
+
+AMD GPUs need a ROCm jaxlib and Apple silicon the experimental Metal backend —
+neither is covered by the `cuda12` extra; see the JAX install docs.
 
 ## Quick start
 
